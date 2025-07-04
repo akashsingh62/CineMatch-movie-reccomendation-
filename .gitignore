@@ -1,0 +1,7 @@
+.env
+
+
+# Pickle files
+*.pkl
+
+__pycache__/
