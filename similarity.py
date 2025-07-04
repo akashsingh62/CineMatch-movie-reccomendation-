@@ -1,23 +1,29 @@
-import pandas as pd
+import os
 import pickle
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+import requests
 
-# Load your movie dataset
-movies = pd.read_csv('movies.csv')
+def download_and_load_similarity():
+    url = "https://drive.google.com/uc?export=download&id=120pmm-bteiAbLho7olWflCNSXZdbamBL"
+    filename = "similarity.pkl"
 
-# Combine text features: overview + genres (can extend to cast, director, etc.)
-movies['tags'] = movies['overview'].fillna('') + " " + movies['genres'].fillna('')
+    # Agar file pehle se nahi hai to download karo
+    if not os.path.exists(filename):
+        print("📦 Downloading similarity.pkl ...")
+        r = requests.get(url)
 
-# Convert text to vectors using Bag-of-Words model
-cv = CountVectorizer(max_features=5000, stop_words='english')
-vectors = cv.fit_transform(movies['tags']).toarray()
+        # ⚠️ Check karo ki HTML page to nahi aa raha
+        content_type = r.headers.get('Content-Type', '')
+        if "text/html" in content_type:
+            with open("error_response.html", "w", encoding="utf-8") as f:
+                f.write(r.text)
+            raise Exception("❌ ERROR: Got HTML instead of .pkl file. Link ya permission sahi check karo!")
 
-# Compute cosine similarity matrix
-similarity = cosine_similarity(vectors)
+        # ✅ Save correct file
+        with open(filename, "wb") as f:
+            f.write(r.content)
+        print("✅ Download complete!")
 
-# Save similarity matrix to file
-pickle.dump(similarity, open('similarity.pkl', 'wb'))
-
-# Save updated movies file with 'tags' column
-movies.to_csv('movies.csv', index=False)
+    # 📦 Load karo similarity.pkl file
+    with open(filename, "rb") as f:
+        similarity = pickle.load(f)
+    return similarity
