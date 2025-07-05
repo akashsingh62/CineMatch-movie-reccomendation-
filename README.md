@@ -14,9 +14,11 @@ A Streamlit-powered web app to recommend movies similar to a given title, comple
 
 ---
 
-## 📸 Demo
+## 🎬 CineMatch - Screenshot
 
-![Demo Screenshot](https://via.placeholder.com/800x400?text=TMDB+Movie+Recommender)
+Here's how the movie recommendation app UI looks:
+
+![CineMatch Screenshot](https://github.com/akashsingh62/CineMatch-movie-reccomendation-/blob/main/movie%20recommendation%20img.png?raw=true)
 
 ---
 
