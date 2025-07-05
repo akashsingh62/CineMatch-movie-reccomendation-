@@ -8,7 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from similarity import download_and_load_similarity
 
-similarity = download_and_load_similarity()
+similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 
 # Load .env file
