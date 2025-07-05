@@ -3,7 +3,7 @@ import pickle
 import requests
 
 def download_and_load_similarity():
-    url = "https://drive.google.com/file/d/1K6r-NS8M_PVev1PVWD1FHYepPSft-L2X/view?usp=drive_link"
+    url = "https://drive.google.com/file/d/1mY_6-a0jW7BUmNzF8i6-JDbd45svyDe1/view?usp=sharing"
     filename = "similarity.pkl"
 
     # Agar file pehle se nahi hai to download karo
